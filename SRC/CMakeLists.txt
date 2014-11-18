@@ -360,11 +360,12 @@ if( USEXBLAS)
   set(ALLXOBJ ${SXLASRC} ${DXLASRC} ${CXLASRC} ${ZXLASRC} ${ALLXAUX})
 endif()
 
-set(ALLOBJ ${SLASRC} ${DLASRC} ${CLASRC} ${ZLASRC} ${SCLAUX} ${DZLAUX}	
-	${ALLAUX})
+set(
+    ALLOBJ
+    ${SLASRC} ${DLASRC} ${CLASRC} ${ZLASRC} ${SCLAUX} ${DZLAUX} ${ALLAUX}
+)
 if(BUILD_SINGLE)
-set(ALLOBJ  ${SLASRC} ${ALLAUX} 
-	${SCLAUX})
+  set(ALLOBJ  ${SLASRC} ${ALLAUX} ${SCLAUX})
 endif()
 if(BUILD_DOUBLE)
   set(ALLOBJ ${DLASRC} ${ALLAUX} ${DZLAUX})
@@ -376,5 +377,6 @@ if(BUILD_COMPLEX16)
   set(ALLOBJ  ${ZLASRC} ${ALLAUX} ${DZLAUX})
 endif()
 add_library(lapack ${ALLOBJ} ${ALLXOBJ})
-target_link_libraries(lapack blas)
+target_link_libraries(lapack PUBLIC blas)
 
+install(TARGETS lapack DESTINATION lib EXPORT CLAPACKTargets)

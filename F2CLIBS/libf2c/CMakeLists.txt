@@ -53,10 +53,19 @@ ADD_CUSTOM_COMMAND(
 
 set(OFILES  ${MISC} ${POW} ${CX} ${DCX} ${REAL} ${DBL} ${INT} 
   ${HALF} ${CMP} ${EFL} ${CHAR} ${I77} ${TIME})
-if(WIN32)
-  add_definitions(-D_COMPLEX_DEFINED)
+add_library(f2c ${OFILES} ${CMAKE_CURRENT_BINARY_DIR}/arith.h)
+
+if(WIN32 AND NOT CYGWIN) # CYGWIN must be 0 for WIN32 (copy/paste as is)
+  target_compile_definitions(f2c PUBLIC MSDOS)
+  target_compile_definitions(f2c PRIVATE NO_ISATTY)
+  target_compile_definitions(f2c PRIVATE USE_CLOCK)
 endif()
+
+if(WIN32)
+  target_compile_definitions(f2c PUBLIC _COMPLEX_DEFINED)
+endif()
+
 include_directories(${CLAPACK_SOURCE_DIR}/F2CLIBS/libf2c)
 include_directories(${CLAPACK_BINARY_DIR}/F2CLIBS/libf2c)
-add_library(f2c ${OFILES} ${CMAKE_CURRENT_BINARY_DIR}/arith.h)
-set_property(TARGET f2c PROPERTY PREFIX lib)
+
+install(TARGETS f2c DESTINATION lib EXPORT CLAPACKTargets)

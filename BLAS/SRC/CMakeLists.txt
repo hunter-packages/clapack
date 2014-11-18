@@ -138,6 +138,8 @@ endif()
   
 add_library(blas ${ALLOBJ})
 if(UNIX)
-  target_link_libraries(blas m)
+  target_link_libraries(blas PUBLIC m)
 endif()
-target_link_libraries(blas f2c)
+target_link_libraries(blas PUBLIC f2c)
+
+install(TARGETS blas DESTINATION lib EXPORT CLAPACKTargets)
