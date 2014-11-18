@@ -1,2 +1,4 @@
 add_subdirectory(SRC)
-add_subdirectory(TESTING)
+if(CLAPACK_BUILD_TESTS)
+  add_subdirectory(TESTING)
+endif()

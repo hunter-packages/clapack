@@ -13,6 +13,7 @@ else()
   set(DSECOND_SRC  ${CLAPACK_SOURCE_DIR}/INSTALL/dsecnd.c)
 endif()
 
+option(CLAPACK_BUILD_TESTS "Build tests" OFF)
 option(USE_BLAS_WRAP "pre-pend f2c_ to each function in blas" OFF)
 if(NOT USE_BLAS_WRAP)
 # _zrotg_ seems to be missing in the wrap header
@@ -24,7 +25,9 @@ include_directories(${CLAPACK_SOURCE_DIR}/INCLUDE)
 add_subdirectory(F2CLIBS)
 add_subdirectory(BLAS)
 add_subdirectory(SRC)
-add_subdirectory(TESTING)
+if(CLAPACK_BUILD_TESTS)
+  add_subdirectory(TESTING)
+endif()
 
 set(CLAPACK_VERSION 3.2.1)
 set(CPACK_PACKAGE_VERSION_MAJOR 3)
