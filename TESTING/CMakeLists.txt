@@ -10,12 +10,11 @@ add_subdirectory(EIG)
 macro(add_lapack_test output input target)
   set(TEST_INPUT "${CLAPACK_SOURCE_DIR}/TESTING/${input}")
   set(TEST_OUTPUT "${CLAPACK_BINARY_DIR}/TESTING/${output}")
-  get_target_property(TEST_LOC ${target} LOCATION)
   string(REPLACE "." "_" input_name ${input})
   set(testName "${target}_${input_name}")
   if(EXISTS "${TEST_INPUT}")
     add_test(${testName} "${CMAKE_COMMAND}"
-      -DTEST=${TEST_LOC}
+      -DTEST=$<TARGET_FILE:${name}>
       -DINPUT=${TEST_INPUT}
       -DOUTPUT=${TEST_OUTPUT}
       -DINTDIR=${CMAKE_CFG_INTDIR}
