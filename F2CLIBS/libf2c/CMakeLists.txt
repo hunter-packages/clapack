@@ -65,6 +65,8 @@ if(WIN32)
   target_compile_definitions(f2c PUBLIC _COMPLEX_DEFINED)
 endif()
 
+target_include_directories(f2c PUBLIC "$<INSTALL_INTERFACE:include>")
+
 include_directories(${CLAPACK_SOURCE_DIR}/F2CLIBS/libf2c)
 include_directories(${CLAPACK_BINARY_DIR}/F2CLIBS/libf2c)
 

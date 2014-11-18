@@ -34,3 +34,8 @@ include(CPack)
 
 install(EXPORT CLAPACKTargets NAMESPACE CLAPACK:: DESTINATION lib/cmake/CLAPACK)
 install(FILES CLAPACKConfig.cmake DESTINATION lib/cmake/CLAPACK)
+
+install(
+    FILES INCLUDE/blaswrap.h INCLUDE/clapack.h INCLUDE/f2c.h
+    DESTINATION include
+)
