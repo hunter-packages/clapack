@@ -39,7 +39,7 @@ macro(add_blas_test name src)
       -DINTDIR=${CMAKE_CFG_INTDIR}
       -P "${CLAPACK_SOURCE_DIR}/TESTING/runtest.cmake")
     else()
-      add_test(${name} "${CMAKE_COMMAND}" 
+      add_test(${name} "${CMAKE_COMMAND}"
         -DTEST=${TEST_LOC}
         -DINTDIR=${CMAKE_CFG_INTDIR}
         -P "${CLAPACK_SOURCE_DIR}/TESTING/runtest.cmake")
